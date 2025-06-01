@@ -1,0 +1,19 @@
+[project]
+name = "requests-bs4"
+version = "0.1.0"
+description = "Web scraping com requests e beautiful soup4"
+authors = [
+    {name = "Lenon Torma",email = "lenoncastro18@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "requests (>=2.32.3,<3.0.0)",
+    "ruff (>=0.11.12,<0.12.0)",
+    "mypy (>=1.16.0,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
