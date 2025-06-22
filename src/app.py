@@ -1,87 +1,152 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from bs4 import BeautifulSoup
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
+import json
 
-# --- Configurações (sem alterações) ---
 caminho_chromedriver = r"C:\Users\Lenon Torma\Desktop\Jornada_de_dados\projeto_end_to_end\requests_bs4\chromedriver.exe"
 service = Service(caminho_chromedriver)
 chrome_options = Options()
-# chrome_options.add_argument("--headless=new")
+chrome_options.add_argument("--start-maximized")
 url = "https://casaraoimoveis.com.br/imoveis/alugueis/pelotas/todos-os-tipos/"
 
-def sua_funcao_de_extracao(html_completo: str):
-    soup = BeautifulSoup(html_completo, 'html.parser')
-    imoveis_encontrados = soup.find_all('div', class_='card-imovel')
-    print(f"    -> Encontrei {len(imoveis_encontrados)} cards de imóveis no HTML final.")
-    return imoveis_encontrados
-
-def raspar_pagina_com_rolagem_infinita(url: str):
-    driver = None
+def extrair_endereco(driver):
     try:
-        print("[ENGENHARIA DE DADOS] Iniciando o processo de web scraping...")
-        driver = webdriver.Chrome(service=service, options=chrome_options)
+        endereco = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "p.endereco"))
+        ).text.strip()
+    except Exception as e:
+        print(f"Erro ao extrair endereço: {e}")
+        endereco = "Endereço não encontrado"
+
+    caracteristicas = {}
+
+    try:
+        container = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, 
+                "body > section > div.caracteristicas > div > div > div > div > div.col-lg-5 > div > div"))
+        )
+        rows = container.find_elements(By.CLASS_NAME, "row")
+        for row in rows:
+            try:
+                nome_element = row.find_element(By.CLASS_NAME, "col")
+                valor_element = row.find_element(By.CLASS_NAME, "valores")
+                nome = nome_element.text.strip()
+                valor = valor_element.text.strip()
+                caracteristicas[nome] = valor
+            except Exception as e:
+                print(f"Erro ao extrair característica em uma linha: {e}")
+                continue
+    except Exception as e:
+        print(f"Erro ao acessar características do imóvel: {e}")
+
+    return endereco, caracteristicas
+
+def carregar_todos_os_cards(driver):
+    scroll_pause = 1.5
+    scroll_step = 400
+    max_tentativas = 15
+    tentativas = 0
+    total_anterior = 0
+
+    while tentativas < max_tentativas:
+        driver.execute_script(f"window.scrollBy(0, {scroll_step});")
+        time.sleep(scroll_pause)
+        cards = driver.find_elements(By.XPATH, '//*[@id="imoveis"]/div')
+        total_atual = len(cards)
+
+        if total_atual > total_anterior:
+            total_anterior = total_atual
+            tentativas = 0
+        else:
+            tentativas += 1
+
+    return total_anterior
+
+def raspar_pagina():
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    try:
         driver.get(url)
-        driver.maximize_window()
         time.sleep(3)
 
-        altura_anterior = driver.execute_script("return document.body.scrollHeight")
-        print(f"Altura inicial da página: {altura_anterior} pixels.")
+        print("Carregando todos os cards com scroll...")
+        total_cards = carregar_todos_os_cards(driver)
+        print(f"Total de cards carregados: {total_cards}")
 
-        while True:
-            # --- MUDANÇA PRINCIPAL AQUI ---
-            # 1. Encontramos o último elemento carregado
-            cards_imoveis = driver.find_elements(By.CSS_SELECTOR, "div.card-imovel")
-            
-            if cards_imoveis:
-                print(f"[AÇÃO] Rolando até o último dos {len(cards_imoveis)} imóveis visíveis...")
-                # 2. Executamos um script para rolar até ele
-                # O argumento {behavior: 'smooth', block: 'center'} ajuda a simular um usuário
-                # e centraliza o elemento na tela, o que é ótimo para acionar eventos.
-                driver.execute_script("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", cards_imoveis[-1])
-            else:
-                # Caso de borda: se nenhum card for encontrado, faz uma rolagem padrão
-                print("[AÇÃO] Nenhum card encontrado ainda, fazendo rolagem padrão.")
-                driver.execute_script("window.scrollBy(0, 800);") # Rola 800 pixels para baixo
+        driver.execute_script("window.scrollTo(0, 0);")
+        time.sleep(2)
 
-            # Espera inteligente para o conteúdo carregar
-            time.sleep(3) # Aumentei um pouco o tempo para dar margem à animação da rolagem e à resposta da rede
+        dados = []
 
-            altura_nova = driver.execute_script("return document.body.scrollHeight")
-            print(f"Nova altura: {altura_nova} pixels.")
+        for i in range(1, total_cards + 1):
+            try:
+                xpath_card = f'//*[@id="imoveis"]/div[{i}]'
+                card = driver.find_element(By.XPATH, xpath_card)
+                driver.execute_script("arguments[0].scrollIntoView();", card)
+                time.sleep(1)
 
-            if altura_nova == altura_anterior:
-                # Tenta uma última rolagem para garantir que não parou por um falso negativo
-                print("[VERIFICAÇÃO] Altura não mudou. Tentando uma última rolagem forçada...")
-                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                time.sleep(3)
-                altura_nova = driver.execute_script("return document.body.scrollHeight")
-                if altura_nova == altura_anterior:
-                    print("\n[STATUS] Fim da página confirmado. Não há mais conteúdo para carregar.")
-                    break
-            
-            altura_anterior = altura_nova
-        
-        print("\n[COLETA] Coletando o HTML final da página completa...")
-        html_final = driver.page_source
-        dados_extraidos = sua_funcao_de_extracao(html_final)
-        return dados_extraidos
+                # Verifica se o card possui uma tag <a>
+                link_elements = card.find_elements(By.TAG_NAME, "a")
+                if not link_elements:
+                    print(f" Card {i} ignorado - sem tag <a> (provavelmente propaganda).")
+                    continue
 
-    except Exception as e:
-        print(f"[ERRO] Um erro inesperado ocorreu: {e}")
-        return None
+                url_imovel = link_elements[0].get_attribute("href")
+
+                if not url_imovel or "/imovel/" not in url_imovel:
+                    print(f" Card {i} ignorado - link não é de imóvel.")
+                    continue
+
+                driver.execute_script(f"window.open('{url_imovel}', '_blank');")
+                driver.switch_to.window(driver.window_handles[1])
+
+                try:
+                    WebDriverWait(driver, 10).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, "p.endereco"))
+                    )
+                except TimeoutException:
+                    print(f"⏳ Timeout esperando o endereço no card {i}")
+                    driver.close()
+                    driver.switch_to.window(driver.window_handles[0])
+                    continue
+
+                endereco, caracteristicas = extrair_endereco(driver)
+                print(f"Endereço do card {i}: {endereco}")
+                print(f"Características: {caracteristicas}")
+
+                driver.close()
+                driver.switch_to.window(driver.window_handles[0])
+                time.sleep(1)
+
+                dados.append({
+                    "card": i,
+                    "url": url_imovel,
+                    "endereco": endereco,
+                    "caracteristicas": caracteristicas
+                })
+
+            except Exception as e:
+                print(f"Erro no card {i} - {e}")
+                if len(driver.window_handles) > 1:
+                    driver.switch_to.window(driver.window_handles[1])
+                    driver.close()
+                    driver.switch_to.window(driver.window_handles[0])
+                continue
+
+        return dados
+
     finally:
-        if driver:
-            print("[STATUS] Processo finalizado. Fechando o navegador.")
-            driver.quit()
+        driver.quit()
 
-# --- Execução Principal (sem alterações) ---
 if __name__ == "__main__":
-    todos_os_imoveis = raspar_pagina_com_rolagem_infinita(url)
-    if todos_os_imoveis:
-        print(f"\n--- RESULTADO FINAL ---")
-        print(f"Total de imóveis coletados: {len(todos_os_imoveis)}")
-    else:
-        print("\n--- Nenhuma informação foi coletada. ---")
+    print("Iniciando scraping...")
+    resultados = raspar_pagina()
+
+    with open('resultados_imoveis.json', 'w', encoding='utf-8') as f:
+        json.dump(resultados, f, indent=2, ensure_ascii=False)
+
+    print(f"\nColeta finalizada! {len(resultados)} imóveis processados.")
