@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import json
 
-caminho_chromedriver = r"C:\Users\Lenon Torma\Desktop\Jornada_de_dados\projeto_end_to_end\requests_bs4\chromedriver.exe"
+caminho_chromedriver = "chromedriver.exe"
 service = Service(caminho_chromedriver)
 chrome_options = Options()
 chrome_options.add_argument("--start-maximized")
