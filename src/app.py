@@ -146,7 +146,7 @@ if __name__ == "__main__":
     print("Iniciando scraping...")
     resultados = raspar_pagina()
 
-    with open('resultados_imoveis.json', 'w', encoding='utf-8') as f:
+    with open('data/resultados_raw.json', 'w', encoding='utf-8') as f:
         json.dump(resultados, f, indent=2, ensure_ascii=False)
 
     print(f"\nColeta finalizada! {len(resultados)} imóveis processados.")
