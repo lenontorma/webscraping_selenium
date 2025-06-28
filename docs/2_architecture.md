@@ -48,12 +48,16 @@ Responsável por:
 - Conectar-se a um banco de dados PostgreSQL.
 - Inserir os registros na tabela apropriada.
 
-## 🔁 Fluxo do Pipeline (ETL)
+## ⚙️ Pipeline de Execução
 
 ```mermaid
-graph LR
-    A[extract_data.py] --> B[data/resultados_raw.json]
-    B --> C[transform_data.py]
-    C --> D[data/resultados_clean.json]
-    D --> E[load_data.py]
-    E --> F[(PostgreSQL)]
+flowchart TD
+    Start([🚀 Início da Pipeline])
+
+    Extract[📥 extract_data.py<br> ➡️ Coleta dados com Selenium]
+    Transform[🧹 transform_data.py<br>➡️ Gera resultados_clean.json]
+    Load[🗄️ load_data.py<br>➡️ Insere dados no PostgreSQL]
+
+    DB[(🟢 PostgreSQL<br>Tabela de imóveis)]
+
+    Start --> Extract --> Transform --> Load --> DB
