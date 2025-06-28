@@ -28,26 +28,32 @@ webscraping_selenium
 └─ README.md                      
 
 
-## ⚙️ Componentes principais
+## ⚙️ Componentes do Pipeline
 
-### 1. `extract.py`
+### 🟦 1. `extract_data.py`
 Responsável por:
-- Iniciar o navegador com Selenium.
-- Fazer scroll na página principal para carregar todos os imóveis.
-- Navegar até a página individual de cada imóvel.
-- Extrair o endereço e as características.
-- Exportar os dados brutos para `data/resultados_raw.json`.
+- Utilizar o Selenium para navegar pela página principal e abrir os links dos imóveis.
+- Extrair o endereço e as características de cada imóvel.
+- Salvar o resultado bruto em `data/resultados_raw.json`.
 
-### 2. `transform.py`
+### 🟨 2. `transform_data.py`
 Responsável por:
-- Corrigir abreviações em endereços (ex: "R." → "Rua").
-- Remover duplicatas da chave `"TOTAL"` no dicionário de características.
-- Exportar os dados limpos para `data/resultados_clean.json`.
+- Normalizar os endereços (ex: "R." → "Rua", "Av." → "Avenida").
+- Eliminar entradas duplicadas ou inconsistentes da chave `"TOTAL"`.
+- Salvar o resultado limpo em `data/resultados_clean.json`.
 
-## 🔁 Fluxo de Execução
+### 🟩 3. `load_data.py`
+Responsável por:
+- Ler o arquivo `resultados_clean.json`.
+- Conectar-se a um banco de dados PostgreSQL.
+- Inserir os registros na tabela apropriada.
+
+## 🔁 Fluxo do Pipeline (ETL)
 
 ```mermaid
-graph TD
-    A[extract.py] -->|Salva JSON bruto| B[resultados_raw.json]
-    B --> C[transform.py]
-    C -->|Salva JSON limpo| D[resultados_clean.json]
+graph LR
+    A[extract_data.py] --> B[data/resultados_raw.json]
+    B --> C[transform_data.py]
+    C --> D[data/resultados_clean.json]
+    D --> E[load_data.py]
+    E --> F[(PostgreSQL)]
