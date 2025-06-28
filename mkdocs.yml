@@ -1,0 +1,54 @@
+site_name: Web Scraping Aluguéis de imóveis
+site_description: Documentação completa da pipeline de scraping e ETL com Selenium, JSON e PostgreSQL.
+site_author: Lenon Torma
+repo_url: https://github.com/lenontorma/webscraping_selenium.git 
+
+plugins:
+  - search
+  - mermaid2:
+      arguments:
+        theme: 'default'
+        startOnLoad: true
+      javascript: https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
+
+theme:
+  name: material
+  language: pt-BR
+  features:
+    - navigation.expand
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+  palette:
+    - scheme: default
+      primary: blue
+      accent: light blue
+
+nav:
+  - Início: index.md
+  - 1. Fontes de Dados: 1_data_sources.md
+  - 2. Arquitetura: 2_architecture.md
+  - 3. Lógica de Scraping: 3_scraping_logic.md
+  - 4. Armazenamento de Dados: 4_data_storage.md
+  - 5. Setup do Projeto: 5_setup.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - codehilite
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist
+  - pymdownx.highlight
+  - pymdownx.emoji
+  - pymdownx.mark
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.superfences:
+      custom_fences:
+              - name: mermaid
+                class: mermaid
+                format: !!python/name:mermaid2.fence_mermaid_custom
