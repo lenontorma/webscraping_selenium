@@ -2,5 +2,8 @@
 .git
 chromedriver.exe
 README.md
-
+*.log
 credentials.json
+__pycache__/
+.env
+data/resultados_clean_backup.json
