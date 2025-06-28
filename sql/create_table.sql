@@ -1,6 +1,5 @@
 CREATE TABLE imoveis (
-    id SERIAL PRIMARY KEY,
-    card INTEGER,
+    card TEXT PRIMARY KEY,
     url TEXT,
     endereco TEXT,
     tipo_imovel TEXT,
