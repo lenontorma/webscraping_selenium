@@ -1,6 +1,7 @@
 import json
 import psycopg2
 
+
 def limpar(valor):
     """Remove R$ e converte para float. Retorna None se for inválido."""
     if valor in (None, "---"):
