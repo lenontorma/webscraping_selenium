@@ -65,4 +65,4 @@ flowchart TD
     G --> H[🏠 Extrair endereço<br>🧾 Extrair características]
     H --> I[❌ Fechar aba]
     I --> D
-
+```

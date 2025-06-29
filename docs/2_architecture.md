@@ -61,3 +61,4 @@ flowchart TD
     DB[(🟢 PostgreSQL<br>Tabela de imóveis)]
 
     Start --> Extract --> Transform --> Load --> DB
+```
