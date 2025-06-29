@@ -1,6 +1,11 @@
+## Projeto publicado no GitHub Pages:
+📎 [Acesse a documentação](https://lenontorma.github.io/webscraping_selenium/)
+
+
+
 # 🏠 Web Scraping - Aluguéis de imóveis
 
-Projeto de **web scraping com Python** para coletar, transformar e armazenar dados de imóveis para aluguel em Pelotas, RS, disponíveis no site [Casarão Imóveis](https://casaraoimoveis.com.br/).
+Projeto de **web scraping com Python** para coletar, transformar e armazenar dados de imóveis para aluguel em Pelotas, RS, disponíveis no site [Casarão Imóveis](https://casaraoimoveis.com.br/imoveis/alugueis/pelotas/todos-os-tipos/?).
 
 ---
 
@@ -8,7 +13,7 @@ Projeto de **web scraping com Python** para coletar, transformar e armazenar dad
 
 | Ferramenta        | Descrição                              |
 |-------------------|------------------------------------------|
-| ![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python) | Linguagem principal do projeto |
+| ![Python](https://img.shields.io/badge/Python-3.12+-blue?logo=python) | Linguagem principal do projeto |
 | ![Selenium](https://img.shields.io/badge/Selenium-Automação-43B02A?logo=selenium) | Automação e scraping da web |
 | ![Poetry](https://img.shields.io/badge/Poetry-Gerenciador%20de%20pacotes-1C1C1C?logo=python) | Gerenciamento de dependências e ambiente |
 | ![MkDocs](https://img.shields.io/badge/MkDocs-Documentação-009688?logo=readthedocs) | Geração de documentação estática |
@@ -47,7 +52,7 @@ flowchart TD
 
 Pré-requisitos
 
- - Python 3.9+
+ - Python 3.12+
 
  - Google Chrome + ChromeDriver compatível
 
@@ -78,6 +83,3 @@ O código do caminho: sql\create_table.sql
 ```bash
 poetry run main.py
 ```
-
-## Projeto publicado no GitHub Pages:
-📎 [Acesse a documentação](https://lenontorma.github.io/webscraping_selenium/)
