@@ -1,7 +1,6 @@
 .venv
 .git
 chromedriver.exe
-README.md
 *.log
 credentials.json
 __pycache__/
