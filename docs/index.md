@@ -1,4 +1,4 @@
-# Web Scraping - Casarão Imóveis
+# Web Scraping - Aluguéis de imóveis
 
 Este projeto realiza web scraping no site [Casarão Imóveis](https://casaraoimoveis.com.br/imoveis/alugueis/pelotas/todos-os-tipos/), com o objetivo de coletar informações de imóveis para aluguel em Pelotas/RS.
 
