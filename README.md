@@ -1,7 +1,7 @@
 ## Projeto publicado no GitHub Pages:
 📎 [Acesse a documentação](https://lenontorma.github.io/webscraping_selenium/)
 
-
+---
 
 # 🏠 Web Scraping - Aluguéis de imóveis
 
