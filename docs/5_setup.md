@@ -6,7 +6,7 @@ Este guia mostra como configurar o ambiente com **Poetry**, instalar as dependê
 
 ## 🧱 Requisitos
 
-- [Python](https://www.python.org/) 3.9+
+- [Python](https://www.python.org/) 3.12+
 - [Poetry](https://python-poetry.org/)
 - [Google Chrome](https://www.google.com/chrome/)
 - [ChromeDriver](https://sites.google.com/chromium.org/driver/)
@@ -47,11 +47,3 @@ CREATE TABLE imoveis (
 
 E não se esqueça, ajuste a conexão no load_data.py com suas credenciais PostgreSQL.
 ```
-
-## 📚 Rodar a Documentação Local
-```bash
-poetry add mkdocs --group docs
-poetry run mkdocs serve
-```
-
-Acesse via: http://localhost:8000
