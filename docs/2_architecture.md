@@ -8,8 +8,7 @@ webscraping_selenium
 ├─ data                            
 │  ├─ resultados_clean.json       
 │  └─ resultados_raw.json         
-├─ docs                           
-│  ├─ assets                      
+├─ docs                                                
 │  ├─ 0_index.md                  
 │  ├─ 1_data_sources.md           
 │  ├─ 2_architecture.md           
