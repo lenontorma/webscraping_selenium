@@ -4,7 +4,7 @@ Este projeto realiza web scraping no site [Casarão Imóveis](https://casaraoimo
 
 A coleta é feita utilizando o Selenium, com rolagem dinâmica da página e abertura individual de cada card de imóvel. Os dados são então transformados e salvos no formato JSON.
 
-Observação: o resultado não gera valor algum, projeto realizado para estudo devido às dificuldades encontradas no site, e para a pratica das tecnologias utilizadas.
+Observação: o resultado não gera valor algum, projeto realizado para estudo devido às dificuldades de raspagem encontradas no site, e para a pratica das tecnologias utilizadas.
 ## Estrutura da Documentação
 
 1. [Fontes de Dados](1_data_sources.md)
