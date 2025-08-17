@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import urllib.parse
 
 def normalizar_endereco(endereco):
     endereco = re.sub(r'\bR\b\.?', 'Rua', endereco, flags=re.IGNORECASE)
@@ -13,7 +14,15 @@ def extrair_tipo_imovel(url):
     match = re.search(r'aluguel-([^/]+)', url, re.IGNORECASE)
     if match:
         tipo = match.group(1).split('-')[0]  # Pega apenas a primeira parte (antes de hífens)
-        return tipo.capitalize()  # Retorna capitalizado (ex: "Casa")
+        tipo = urllib.parse.unquote(tipo).lower()  # decodifica %c3 etc e coloca minúsculo
+
+        # Normalizações específicas
+        if tipo == "prédio":
+            return "predio"
+        if tipo == "pavilhão":
+            return "pavilhao"
+
+        return tipo.capitalize()
     return "Desconhecido"
 
 def limpar_chaves_total(caracteristicas):

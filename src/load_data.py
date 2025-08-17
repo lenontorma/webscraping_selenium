@@ -1,13 +1,14 @@
 import json
 import psycopg2
 
-
 def limpar(valor):
-    """Remove R$ e converte para float. Retorna None se for inválido."""
     if valor in (None, "---"):
         return None
-    valor = valor.replace("R$", "").replace(".", "").replace(",", ".").strip()
-    return float(valor)
+    valor = str(valor).replace("R$", "").replace("\xa0", " ").replace(".", "").replace(",", ".").strip()
+    try:
+        return float(valor)
+    except ValueError:
+        return None
 
 def run_load():
     with open("data/resultados_clean.json", "r", encoding="utf-8") as f:
@@ -39,7 +40,14 @@ def run_load():
         cur.execute("""
             INSERT INTO imoveis (card, url, endereco, tipo_imovel, aluguel, condominio, iptu, total)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-            ON CONFLICT (card) DO NOTHING
+            ON CONFLICT (card) DO UPDATE SET
+                url = EXCLUDED.url,
+                endereco = EXCLUDED.endereco,
+                tipo_imovel = EXCLUDED.tipo_imovel,
+                aluguel = EXCLUDED.aluguel,
+                condominio = EXCLUDED.condominio,
+                iptu = EXCLUDED.iptu,
+                total = EXCLUDED.total
         """, (card, url, endereco, tipo, aluguel, condominio, iptu, total))
 
     conn.commit()
