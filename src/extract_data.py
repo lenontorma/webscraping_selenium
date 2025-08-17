@@ -13,6 +13,11 @@ caminho_chromedriver = "chromedriver.exe"
 service = Service(caminho_chromedriver, log_path=os.devnull)
 chrome_options = Options()
 
+# adiciona o modo headless
+chrome_options.add_argument("--headless=new")   # recomendado nas versões recentes do Chrome
+chrome_options.add_argument("--disable-gpu")    # evita alguns erros gráficos
+chrome_options.add_argument("--window-size=1920,1080")  # define tamanho da janela virtual
+
 url = "https://casaraoimoveis.com.br/imoveis/alugueis/pelotas/todos-os-tipos/"
 
 def extrair_endereco(driver):
