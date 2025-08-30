@@ -2,6 +2,8 @@ import json
 import os
 import re
 import urllib.parse
+from airflow.decorators import dag
+from datetime import datetime
 
 def normalizar_endereco(endereco):
     endereco = re.sub(r'\bR\b\.?', 'Rua', endereco, flags=re.IGNORECASE)
@@ -10,24 +12,19 @@ def normalizar_endereco(endereco):
     return endereco.strip()
 
 def extrair_tipo_imovel(url):
-    # Extrai tudo após "aluguel-" até a próxima barra (/)
     match = re.search(r'aluguel-([^/]+)', url, re.IGNORECASE)
     if match:
-        tipo = match.group(1).split('-')[0]  # Pega apenas a primeira parte (antes de hífens)
-        tipo = urllib.parse.unquote(tipo).lower()  # decodifica %c3 etc e coloca minúsculo
-
-        # Normalizações específicas
+        tipo = match.group(1).split('-')[0]
+        tipo = urllib.parse.unquote(tipo).lower()
         if tipo == "prédio":
             return "predio"
         if tipo == "pavilhão":
             return "pavilhao"
-
         return tipo.capitalize()
     return "Desconhecido"
 
 def limpar_chaves_total(caracteristicas):
     total_keys = [key for key in caracteristicas.keys() if key.strip().startswith("TOTAL")]
-    
     if len(total_keys) > 1:
         preferida = next((k for k in total_keys if k.strip() == "TOTAL:"), total_keys[0])
         novas_caracteristicas = {}
@@ -38,8 +35,16 @@ def limpar_chaves_total(caracteristicas):
         return novas_caracteristicas
     return caracteristicas
 
+@dag(
+    dag_id="transform_casarao_imoveis_data",
+    start_date=datetime(2023, 1, 1),
+    schedule=None,
+    catchup=False,
+    tags=["data_transformation", "imoveis"]
+)
 def run_transform():
-    RAW_PATH = "data/resultados_raw.json"
+    AIRFLOW_HOME = os.getenv("AIRFLOW_HOME", "/usr/local/airflow")
+    RAW_PATH = os.path.join(AIRFLOW_HOME, "include", "data", "resultados_raw.json")
     CLEAN_PATH = "data/resultados_clean.json"
 
     os.makedirs(os.path.dirname(CLEAN_PATH), exist_ok=True)
@@ -57,5 +62,7 @@ def run_transform():
 
     print("✅ Dados transformados com sucesso.")
 
-if __name__ == "__main__":
-    run_transform()
+# if __name__ == "__main__":
+#     run_transform()
+
+run_transform() # Instancia a DAG

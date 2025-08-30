@@ -1,0 +1,6 @@
+# Astro Runtime includes the following pre-installed providers packages: https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages
+selenium==4.33.0
+psycopg2-binary==2.9.10
+ruff==0.12.0
+pandas==2.3.0
+apache-airflow-providers-postgres

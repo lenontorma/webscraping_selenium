@@ -9,7 +9,7 @@ Este guia mostra como configurar o ambiente com **Poetry**, instalar as dependê
 - [Python](https://www.python.org/) 3.12+
 - [Poetry](https://python-poetry.org/)
 - [Google Chrome](https://www.google.com/chrome/)
-- [ChromeDriver](https://sites.google.com/chromium.org/driver/)
+- [ChromeDriver](https://sites.google.com/chromium.org/driver/) (Verificar versão do navegador)
 - [PostgreSQL](https://www.postgresql.org/)
 
 ---
