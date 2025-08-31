@@ -11,9 +11,9 @@
 <link href="../3_scraping_logic/" rel="prev"/>
 <link href="../5_boas_praticas/" rel="next"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.18" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.14" name="generator"/>
 <title>4. Orquestração - Airflow - Web Scraping Aluguéis de imóveis</title>
-<link href="../assets/stylesheets/main.7e37652d.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.342714a4.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -25,7 +25,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#2-arquitetura-do-projeto">
+<a class="md-skip" href="#orquestracao-com-apache-airflow">
           Pular para conteúdo
         </a>
 </div>
@@ -93,7 +93,7 @@
 <div class="md-header__source">
 <a class="md-source" data-md-component="source" href="https://github.com/lenontorma/webscraping_selenium.git" title="Ir para repositório">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4" fill="currentColor"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"></path></svg>
 </div>
 <div class="md-source__repository">
     GitHub
@@ -118,7 +118,7 @@
 <div class="md-nav__source">
 <a class="md-source" data-md-component="source" href="https://github.com/lenontorma/webscraping_selenium.git" title="Ir para repositório">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4" fill="currentColor"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"></path></svg>
 </div>
 <div class="md-source__repository">
     GitHub
@@ -180,38 +180,38 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#estrutura-de-diretorios">
+<a class="md-nav__link" href="#contexto-de-execucao-astro-cli">
 <span class="md-ellipsis">
-      🗂️ Estrutura de Diretórios
+      Contexto de Execução: Astro CLI
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#componentes-do-pipeline">
+<a class="md-nav__link" href="#visao-geral-da-dag">
 <span class="md-ellipsis">
-      ⚙️ Componentes do Pipeline
+      Visão Geral da DAG
     </span>
 </a>
-<nav aria-label="⚙️ Componentes do Pipeline" class="md-nav">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#estrutura-e-tarefas-do-pipeline">
+<span class="md-ellipsis">
+      Estrutura e Tarefas do Pipeline
+    </span>
+</a>
+<nav aria-label="Estrutura e Tarefas do Pipeline" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-extract_datapy">
+<a class="md-nav__link" href="#diagrama-de-fluxo">
 <span class="md-ellipsis">
-      🟦 1. extract_data.py
+      Diagrama de Fluxo
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-transform_datapy">
+<a class="md-nav__link" href="#detalhamento-das-tarefas">
 <span class="md-ellipsis">
-      🟨 2. transform_data.py
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#3-load_datapy">
-<span class="md-ellipsis">
-      🟩 3. load_data.py
+      Detalhamento das Tarefas
     </span>
 </a>
 </li>
@@ -219,9 +219,9 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#pipeline-de-execucao">
+<a class="md-nav__link" href="#monitoramento-e-logs">
 <span class="md-ellipsis">
-      ⚙️ Pipeline de Execução
+      Monitoramento e Logs
     </span>
 </a>
 </li>
@@ -251,38 +251,38 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#estrutura-de-diretorios">
+<a class="md-nav__link" href="#contexto-de-execucao-astro-cli">
 <span class="md-ellipsis">
-      🗂️ Estrutura de Diretórios
+      Contexto de Execução: Astro CLI
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#componentes-do-pipeline">
+<a class="md-nav__link" href="#visao-geral-da-dag">
 <span class="md-ellipsis">
-      ⚙️ Componentes do Pipeline
+      Visão Geral da DAG
     </span>
 </a>
-<nav aria-label="⚙️ Componentes do Pipeline" class="md-nav">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#estrutura-e-tarefas-do-pipeline">
+<span class="md-ellipsis">
+      Estrutura e Tarefas do Pipeline
+    </span>
+</a>
+<nav aria-label="Estrutura e Tarefas do Pipeline" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-extract_datapy">
+<a class="md-nav__link" href="#diagrama-de-fluxo">
 <span class="md-ellipsis">
-      🟦 1. extract_data.py
+      Diagrama de Fluxo
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-transform_datapy">
+<a class="md-nav__link" href="#detalhamento-das-tarefas">
 <span class="md-ellipsis">
-      🟨 2. transform_data.py
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#3-load_datapy">
-<span class="md-ellipsis">
-      🟩 3. load_data.py
+      Detalhamento das Tarefas
     </span>
 </a>
 </li>
@@ -290,9 +290,9 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#pipeline-de-execucao">
+<a class="md-nav__link" href="#monitoramento-e-logs">
 <span class="md-ellipsis">
-      ⚙️ Pipeline de Execução
+      Monitoramento e Logs
     </span>
 </a>
 </li>
@@ -303,58 +303,68 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="2-arquitetura-do-projeto">2. Arquitetura do Projeto<a class="headerlink" href="#2-arquitetura-do-projeto" title="Permanent link">¶</a></h1>
-<p>Este projeto é dividido em duas fases principais: <strong>extração</strong> e <strong>transformação</strong> de dados.</p>
-<h2 id="estrutura-de-diretorios">🗂️ Estrutura de Diretórios<a class="headerlink" href="#estrutura-de-diretorios" title="Permanent link">¶</a></h2>
-<p>webscraping_selenium            <br/>
-├─ data                          <br/>
-│  ├─ resultados_clean.json     <br/>
-│  └─ resultados_raw.json       <br/>
-├─ docs                                              <br/>
-│  ├─ 0_index.md                <br/>
-│  ├─ 1_data_sources.md         <br/>
-│  ├─ 2_architecture.md         <br/>
-│  ├─ 3_scraping_logic.md       <br/>
-│  ├─ 4_data_storage.md         <br/>
-│  └─ 5_setup.md                <br/>
-├─ sql                          <br/>
-│  └─ create_table.sql          <br/>
-├─ src                                <br/>
-│  ├─ extract_data.py           <br/>
-│  ├─ load_data.py              <br/>
-│  └─ transform_data.py                                   <br/>
-├─ main.py                      <br/>
-├─ poetry.lock                  <br/>
-├─ pyproject.toml               <br/>
-└─ README.md                      </p>
-<h2 id="componentes-do-pipeline">⚙️ Componentes do Pipeline<a class="headerlink" href="#componentes-do-pipeline" title="Permanent link">¶</a></h2>
-<h3 id="1-extract_datapy">🟦 1. <code>extract_data.py</code><a class="headerlink" href="#1-extract_datapy" title="Permanent link">¶</a></h3>
-<p>Responsável por:
-- Utilizar o Selenium para navegar pela página principal e abrir os links dos imóveis.
-- Extrair o endereço e as características de cada imóvel.
-- Salvar o resultado bruto em <code>data/resultados_raw.json</code>.</p>
-<h3 id="2-transform_datapy">🟨 2. <code>transform_data.py</code><a class="headerlink" href="#2-transform_datapy" title="Permanent link">¶</a></h3>
-<p>Responsável por:
-- Normalizar os endereços (ex: "R." → "Rua", "Av." → "Avenida").
-- Eliminar entradas duplicadas ou inconsistentes da chave <code>"TOTAL"</code>.
-- Salvar o resultado limpo em <code>data/resultados_clean.json</code>.</p>
-<h3 id="3-load_datapy">🟩 3. <code>load_data.py</code><a class="headerlink" href="#3-load_datapy" title="Permanent link">¶</a></h3>
-<p>Responsável por:
-- Ler o arquivo <code>resultados_clean.json</code>.
-- Conectar-se a um banco de dados PostgreSQL.
-- Inserir os registros na tabela apropriada.</p>
-<h2 id="pipeline-de-execucao">⚙️ Pipeline de Execução<a class="headerlink" href="#pipeline-de-execucao" title="Permanent link">¶</a></h2>
-<pre class="mermaid"><code>flowchart TD
-    Start([🚀 Início da Pipeline])
-
-    Extract[📥 extract_data.py<br/> ➡️ Coleta dados com Selenium]
-    Transform[🧹 transform_data.py<br/>➡️ Gera resultados_clean.json]
-    Load[🗄️ load_data.py<br/>➡️ Insere dados no PostgreSQL]
-
-    DB[(🟢 PostgreSQL<br/>Tabela de imóveis)]
-
-    Start --&gt; Extract --&gt; Transform --&gt; Load --&gt; DB
+<h1 id="orquestracao-com-apache-airflow">Orquestração com Apache Airflow<a class="headerlink" href="#orquestracao-com-apache-airflow" title="Permanent link">¶</a></h1>
+<p>Toda a pipeline de web scraping é orquestrada utilizando o Apache Airflow. Isso garante que a coleta, transformação e carga dos dados sejam executadas de forma controlada e resiliente.</p>
+<h2 id="contexto-de-execucao-astro-cli">Contexto de Execução: Astro CLI<a class="headerlink" href="#contexto-de-execucao-astro-cli" title="Permanent link">¶</a></h2>
+<p>Para o desenvolvimento e execução local, este projeto utiliza o <strong>Astro CLI</strong>. Esta ferramenta simplifica o gerenciamento do ambiente Airflow via Docker, permitindo que a DAG seja iniciada e testada facilmente. Para mais detalhes sobre a configuração, consulte a seção <a href="../1_setup/">Setup do Projeto</a>.</p>
+<h2 id="visao-geral-da-dag">Visão Geral da DAG<a class="headerlink" href="#visao-geral-da-dag" title="Permanent link">¶</a></h2>
+<p>A orquestração é controlada por uma única DAG (Directed Acyclic Graph) que define o fluxo de trabalho completo.</p>
+<ul>
+<li><strong>ID da DAG:</strong> <code>casarao_imoveis_etl</code></li>
+<li><strong>Agendamento (Schedule):</strong> Atualmente, a DAG está configurada para ser executada apenas <strong>manualmente</strong> (<code>schedule=None</code>). Para agendar uma execução automática (por exemplo, diária), o parâmetro <code>schedule</code> no código da DAG pode ser alterado.<ul>
+<li><em>Exemplo para execução diária às 03:00 UTC:</em> <code>schedule="0 3 * * *"</code></li>
+</ul>
+</li>
+<li><strong>Tags:</strong> A DAG é categorizada com as seguintes tags para facilitar a busca na interface do Airflow: <code>web_scraper_casarao_imoveis</code>, <code>transform_casarao_imoveis_data</code>, <code>load_casarao_imoveis_data</code>.</li>
+</ul>
+<h2 id="estrutura-e-tarefas-do-pipeline">Estrutura e Tarefas do Pipeline<a class="headerlink" href="#estrutura-e-tarefas-do-pipeline" title="Permanent link">¶</a></h2>
+<p>O pipeline é dividido em três tarefas principais, seguindo o padrão ETL. O fluxo de dependências garante que uma tarefa só inicie após o sucesso da anterior.</p>
+<h3 id="diagrama-de-fluxo">Diagrama de Fluxo<a class="headerlink" href="#diagrama-de-fluxo" title="Permanent link">¶</a></h3>
+<pre class="mermaid"><code>graph TD;
+    A[Start] --&gt; B(run_extract_task);
+    B --&gt; C{run_transform_task};
+    C --&gt; D[run_load_task];
+    D --&gt; E[End];
 </code></pre>
+<h3 id="detalhamento-das-tarefas">Detalhamento das Tarefas<a class="headerlink" href="#detalhamento-das-tarefas" title="Permanent link">¶</a></h3>
+<ol>
+<li>
+<p><strong><code>run_extract_task</code> (Extração)</strong></p>
+<ul>
+<li><strong>Responsabilidade:</strong> Esta tarefa é responsável por iniciar o navegador com Selenium, navegar até o site da Casarão Imóveis, realizar a rolagem infinita para carregar todos os cards e extrair os dados brutos de cada imóvel.</li>
+<li><strong>Saída:</strong> Um arquivo <strong>JSON</strong> contendo uma lista de todos os imóveis coletados. Este arquivo é a fonte de dados para a próxima etapa.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>run_transform_task</code> (Transformação)</strong></p>
+<ul>
+<li><strong>Responsabilidade:</strong> Lê o arquivo JSON gerado pela tarefa de extração. Realiza a limpeza e a padronização dos dados (ex: remove "R$", converte tipos, trata valores nulos, padroniza abreviações de endereços) e estrutura as informações em um formato final.</li>
+<li><strong>Saída:</strong> Um novo arquivo <strong>JSON</strong> com os dados limpos e estruturados, pronto para ser carregado no banco de dados.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>run_load_task</code> (Carga)</strong></p>
+<ul>
+<li><strong>Responsabilidade:</strong> Pega o arquivo JSON com os dados limpos da etapa de transformação e o carrega na tabela <strong><code>imoveis</code></strong> no banco de dados PostgreSQL.</li>
+<li><strong>Conexão com o Banco:</strong> A lógica de conexão com o PostgreSQL é gerenciada dentro do código desta tarefa.
+    !!! tip "Boa Prática"
+        Para aumentar a segurança e a flexibilidade, é recomendado gerenciar credenciais de banco de dados através das <a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/connections.html">Conexões (Connections)</a> do Airflow, em vez de mantê-las em arquivos de configuração ou no código.</li>
+</ul>
+</li>
+</ol>
+<h2 id="monitoramento-e-logs">Monitoramento e Logs<a class="headerlink" href="#monitoramento-e-logs" title="Permanent link">¶</a></h2>
+<p>Para verificar a execução de uma DAG, depurar um erro ou analisar o desempenho, a interface do Airflow fornece ferramentas visuais e logs detalhados.</p>
+<ol>
+<li>Acesse a interface do Airflow (<code>http://localhost:8080</code>).</li>
+<li>Clique na DAG <code>casarao_imoveis_etl</code>.</li>
+</ol>
+<p>A <strong>visualização "Grid"</strong> é a ferramenta principal para o monitoramento. Ela permite acompanhar o histórico das execuções da DAG e analisar a duração de cada tarefa individualmente.</p>
+<p><img alt="Histórico da DAG no Airflow" src="../assets/historico_run.png"/>
+<img alt="Duração das Execuções da DAG no Airflow" src="../assets/tmd_dag.png"/></p>
+<p><em>Na imagem acima, podemos observar as últimas execuções da DAG, com destaque para o status de cada tarefa (<code>run_extract_task</code>, <code>run_transform_task</code>, <code>run_load_task</code>) e a duração de cada etapa. Esta visão é essencial para identificar padrões de performance, gargalos, e garantir que o pipeline esteja operando dentro dos tempos esperados.</em></p>
+<ol>
+<li>Para ver os logs detalhados de uma tarefa específica em uma execução, clique no quadrado correspondente e, em seguida, na aba <strong>"Log"</strong>.</li>
+</ol>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
@@ -382,8 +392,8 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
-<script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+<script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script>window.mermaidConfig = {default: {
     theme: "default",
     startOnLoad: false
