@@ -1,85 +1,34 @@
-## Projeto publicado no GitHub Pages:
-📎 [Acesse a documentação](https://lenontorma.github.io/webscraping_selenium/)
-
----
-
 # 🏠 Web Scraping - Aluguéis de imóveis
 
-Projeto de **web scraping com Python** para coletar, transformar e armazenar dados de imóveis para aluguel em Pelotas, RS, disponíveis no site [Casarão Imóveis](https://casaraoimoveis.com.br/imoveis/alugueis/pelotas/todos-os-tipos/?).
+Projeto de web scraping com Python para coletar, transformar e armazenar dados de imóveis para aluguel em Pelotas, RS, disponíveis no site [Casarão Imóveis](https://www.casaraoimoveis.com.br/).
 
----
+## 🎯 Objetivos e Funcionalidades
 
-## 🔧 Tecnologias Utilizadas
+O objetivo principal deste projeto é construir um pipeline de dados robusto para a extração automatizada de informações imobiliárias, superando desafios técnicos comuns em web scraping.
 
-| Ferramenta        | Descrição                              |
-|-------------------|------------------------------------------|
-| ![Python](https://img.shields.io/badge/Python-3.12+-blue?logo=python) | Linguagem principal do projeto |
-| ![Selenium](https://img.shields.io/badge/Selenium-Automação-43B02A?logo=selenium) | Automação e scraping da web |
-| ![Poetry](https://img.shields.io/badge/Poetry-Gerenciador%20de%20pacotes-1C1C1C?logo=python) | Gerenciamento de dependências e ambiente |
-| ![MkDocs](https://img.shields.io/badge/MkDocs-Documentação-009688?logo=readthedocs) | Geração de documentação estática |
-| ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Banco%20de%20dados-336791?logo=postgresql) | Armazenamento estruturado dos dados |
+As funcionalidades implementadas incluem:
 
----
+* **Pipeline ETL Completo:** Implementação de um processo de engenharia de dados de ponta a ponta:
+    * **Extração (Extract):** Coleta de dados brutos do site Casarão Imóveis utilizando Selenium para lidar com navegação dinâmica e grande volume de dados.
+    * **Transformação (Transform):** Limpeza, normalização, estruturação e enriquecimento dos dados coletados para garantir consistência e qualidade.
+    * **Carga (Load):** Armazenamento dos dados transformados em um banco de dados PostgreSQL, prontos para consumo e análise.
 
-## 🔍 Objetivo
+* **Navegação Dinâmica:** Tratamento de **rolagem infinita** (`infinite scroll`) para garantir o carregamento de todos os imóveis.
+* **Coleta Detalhada:** Lógica para abrir **cada imóvel em uma nova aba** e extrair informações específicas.
+* **Filtro Inteligente:** Capacidade de diferenciar e ignorar cards de **propaganda** ou elementos não-clicáveis durante a coleta.
+* **Documentação Profissional:** Criação de uma documentação completa utilizando **MkDocs**.
 
-> Este projeto foi desenvolvido com **finalidade de estudo prático** em web scraping, automação e engenharia de dados.
+## 🛠️ Tecnologias Utilizadas
 
-O site da [Casarão Imóveis](https://casaraoimoveis.com.br/) foi escolhido propositalmente devido aos **desafios técnicos envolvidos no scraping**, incluindo:
+Este projeto foi construído utilizando as seguintes tecnologias e ferramentas:
 
-- Rolagem infinita para carregar todos os imóveis
-- Presença de cards que são **propagandas ou não clicáveis**
-- Necessidade de abrir **cada imóvel em uma nova aba** para coletar dados detalhados
-- Mais de 1000 imoveis para serem coletados
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
+![Apache Airflow](https://img.shields.io/badge/Apache_Airflow-017CEE?style=for-the-badge&logo=apache-airflow&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![MkDocs](https://img.shields.io/badge/MkDocs-4A74A5?style=for-the-badge&logo=markdown&logoColor=white)
 
-Além disso, o projeto permitiu exercitar o uso de:
-- Coleta automatizada com Selenium
-- Estruturação do pipeline em etapas: extração, transformação e carga (ETL)
-- Armazenamento dos dados em PostgreSQL
-- Documentação profissional com MkDocs + Mermaid
+## 🚀 Como Executar (Quick Start)
 
----
-
-## 🧠 Arquitetura (ETL)
-
-```mermaid
-flowchart TD
-    A[📥 extract_data.py<br>➡️ Scraping com Selenium] --> B[🧹 transform_data.py<br>➡️ Limpeza e normalização]
-    B --> C[🗄️ load_data.py<br>➡️ Inserção no PostgreSQL]
-```
-
-## 🚀 Como Executar o Projeto
-
-Pré-requisitos
-
- - Python 3.12+
-
- - Google Chrome + ChromeDriver compatível
-
- - PostgreSQL (opcional)
-
- - Poetry
-
-
-## Instalação
-```bash
-# 1. Clone o projeto
-git clone https://github.com/seu-usuario/webscraping_selenium.git
-cd webscraping_selenium
-
-# 2. Instale as dependências
-poetry install
-
-# 3. Ative o ambiente virtual
-poetry shell (Deve ser instalada a extensão "poetry self add poetry-plugin-shell")
-
-# 4. Executar no Postgres
-
-O código do caminho: sql\create_table.sql
-
-```
-
-## Execução da pipeline
-```bash
-poetry run main.py
-```
+*Esta seção será adicionada em breve com os comandos essenciais para a execução do projeto.*
