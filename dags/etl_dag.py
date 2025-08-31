@@ -1,10 +1,11 @@
-from airflow.decorators import dag, task
+# dags/etl_dag.py
+from airflow.decorators import dag
 from datetime import datetime
 
-# Importar as funções DAG de cada arquivo
-from dag_scraper import run_extract
-from dag_transform import run_transform
-from dag_load import run_load
+# Importar apenas as tasks
+from dag_scraper import run_extract_task
+from dag_transform import run_transform_task
+from dag_load import run_load_task
 
 @dag(
     dag_id="casarao_imoveis_etl",
@@ -14,13 +15,13 @@ from dag_load import run_load
     tags=["etl", "web_scraping", "imoveis"]
 )
 def casarao_imoveis_etl_dag():
-    # Definir as tarefas chamando as funções DAG importadas
-    extract_task = run_extract()
-    transform_task = run_transform()
-    load_task = run_load()
+    # Chama as tasks (não DAGs)
+    extract = run_extract_task()
+    transform = run_transform_task()
+    load = run_load_task()
 
-    # Definir as dependências das tarefas
-    extract_task >> transform_task >> load_task
+    # Encadeia as tasks
+    extract >> transform >> load
 
-# Instanciar a DAG para que o Airflow a detecte
+# Instancia a DAG
 casarao_imoveis_etl_dag()

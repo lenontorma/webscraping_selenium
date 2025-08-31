@@ -1,3 +1,4 @@
+# dags/dag_scraper.py
 from airflow.decorators import dag, task
 from datetime import datetime
 import os
@@ -13,10 +14,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
-
+# -------------------- TASK --------------------
 @task
 def run_extract_task():
-    # Configuração do Selenium
     service = Service(log_path=os.devnull)
     chrome_options = Options()
     chrome_options.add_argument("--headless=new")
@@ -34,7 +34,7 @@ def run_extract_task():
         driver.get(url)
         time.sleep(3)
 
-        # Função para carregar todos os cards
+        # Carregar todos os cards
         def carregar_todos_os_cards(driver):
             scroll_pause = 2
             scroll_step = 400
@@ -47,23 +47,20 @@ def run_extract_task():
                 time.sleep(scroll_pause)
                 cards = driver.find_elements(By.XPATH, '//*[@id="imoveis"]/div')
                 total_atual = len(cards)
-
                 if total_atual > total_anterior:
                     total_anterior = total_atual
                     tentativas = 0
                 else:
                     tentativas += 1
-
             return total_anterior
 
-        # Função para extrair endereço e características
+        # Extrair endereço e características
         def extrair_endereco(driver):
             try:
                 endereco = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, "p.endereco"))
                 ).text.strip()
-            except Exception as e:
-                print(f"Erro ao extrair endereço: {e}")
+            except Exception:
                 endereco = "Endereço não encontrado"
 
             caracteristicas = {}
@@ -80,22 +77,17 @@ def run_extract_task():
                         nome = nome_element.text.strip()
                         valor = valor_element.text.strip()
                         caracteristicas[nome] = valor
-                    except Exception as e:
+                    except Exception:
                         continue
             except Exception:
                 pass
-
             return endereco, caracteristicas
 
-        # Carregar todos os cards
-        print("Carregando todos os cards com scroll...")
         total_cards = carregar_todos_os_cards(driver)
-        print(f"Total de cards carregados: {total_cards}")
         driver.execute_script("window.scrollTo(0, 0);")
         time.sleep(2)
 
         dados = []
-
         for i in range(1, total_cards + 1):
             try:
                 xpath_card = f'//*[@id="imoveis"]/div[{i}]'
@@ -104,16 +96,13 @@ def run_extract_task():
                 time.sleep(1)
 
                 link_elements = card.find_elements(By.TAG_NAME, "a")
-                if not link_elements:
-                    continue
+                if not link_elements: continue
 
                 url_imovel = link_elements[0].get_attribute("href")
-                if not url_imovel or "/imovel/" not in url_imovel:
-                    continue
+                if not url_imovel or "/imovel/" not in url_imovel: continue
 
                 driver.execute_script(f"window.open('{url_imovel}', '_blank');")
                 driver.switch_to.window(driver.window_handles[1])
-
                 try:
                     WebDriverWait(driver, 10).until(
                         EC.presence_of_element_located((By.CSS_SELECTOR, "p.endereco"))
@@ -124,7 +113,6 @@ def run_extract_task():
                     continue
 
                 endereco, caracteristicas = extrair_endereco(driver)
-
                 driver.close()
                 driver.switch_to.window(driver.window_handles[0])
                 time.sleep(1.5)
@@ -135,7 +123,6 @@ def run_extract_task():
                     "endereco": endereco,
                     "caracteristicas": caracteristicas
                 })
-
             except Exception:
                 if len(driver.window_handles) > 1:
                     driver.switch_to.window(driver.window_handles[1])
@@ -143,7 +130,6 @@ def run_extract_task():
                     driver.switch_to.window(driver.window_handles[0])
                 continue
 
-        # Certifica-se de que o diretório 'data' existe
         os.makedirs('data', exist_ok=True)
         with open('data/resultados_raw.json', 'w', encoding='utf-8') as f:
             json.dump(dados, f, indent=2, ensure_ascii=False)
@@ -154,7 +140,7 @@ def run_extract_task():
         driver.quit()
 
 
-# DAG
+# -------------------- DAG --------------------
 @dag(
     dag_id="web_scraper_casarao_imoveis",
     start_date=datetime(2023, 1, 1),
@@ -162,9 +148,8 @@ def run_extract_task():
     catchup=False,
     tags=["web_scraping", "imoveis"]
 )
-def run_extract():
+def web_scraper_dag():
     run_extract_task()
 
-
 # Instancia a DAG
-run_extract()
+web_scraper_dag()

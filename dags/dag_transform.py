@@ -1,10 +1,12 @@
+# dags/dag_transform.py
 import json
 import os
 import re
 import urllib.parse
-from airflow.decorators import dag
+from airflow.decorators import dag, task
 from datetime import datetime
 
+# -------------------- FUNÇÕES AUXILIARES --------------------
 def normalizar_endereco(endereco):
     endereco = re.sub(r'\bR\b\.?', 'Rua', endereco, flags=re.IGNORECASE)
     endereco = re.sub(r'\bAv\b\.?', 'Avenida', endereco, flags=re.IGNORECASE)
@@ -16,10 +18,8 @@ def extrair_tipo_imovel(url):
     if match:
         tipo = match.group(1).split('-')[0]
         tipo = urllib.parse.unquote(tipo).lower()
-        if tipo == "prédio":
-            return "predio"
-        if tipo == "pavilhão":
-            return "pavilhao"
+        if tipo == "prédio": return "predio"
+        if tipo == "pavilhão": return "pavilhao"
         return tipo.capitalize()
     return "Desconhecido"
 
@@ -35,14 +35,9 @@ def limpar_chaves_total(caracteristicas):
         return novas_caracteristicas
     return caracteristicas
 
-@dag(
-    dag_id="transform_casarao_imoveis_data",
-    start_date=datetime(2023, 1, 1),
-    schedule=None,
-    catchup=False,
-    tags=["data_transformation", "imoveis"]
-)
-def run_transform():
+# -------------------- TASK --------------------
+@task
+def run_transform_task():
     AIRFLOW_HOME = os.getenv("AIRFLOW_HOME", "/usr/local/airflow")
     RAW_PATH = os.path.join(AIRFLOW_HOME, "include", "data", "resultados_raw.json")
     CLEAN_PATH = "data/resultados_clean.json"
@@ -62,7 +57,16 @@ def run_transform():
 
     print("✅ Dados transformados com sucesso.")
 
-# if __name__ == "__main__":
-#     run_transform()
+# -------------------- DAG --------------------
+@dag(
+    dag_id="transform_casarao_imoveis_data",
+    start_date=datetime(2023, 1, 1),
+    schedule=None,
+    catchup=False,
+    tags=["data_transformation", "imoveis"]
+)
+def transform_dag():
+    run_transform_task()
 
-run_transform() # Instancia a DAG
+# Instancia a DAG
+transform_dag()
