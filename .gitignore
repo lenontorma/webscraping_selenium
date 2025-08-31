@@ -5,5 +5,8 @@ chromedriver.exe
 credentials.json
 __pycache__/
 .env
-data/resultados_clean_backup.json
 site/
+*.pyc
+site/
+poetry.lock
+pyproject.toml
