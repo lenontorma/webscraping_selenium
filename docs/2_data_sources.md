@@ -27,7 +27,7 @@ A listagem de imóveis está em um container com ID `#imoveis`, onde cada card r
 ## 🧭 Estratégia de navegação
 
 1. A página principal exige **scroll infinito** para carregar todos os imóveis.
-![Demonstração do scroll infinito](docs/assets/scroll-infinito.png)
+![Demonstração do scroll infinito](assets/scroll-infinito.png)
 2. Cada imóvel possui um link para sua **página individual**.
 3. As informações completas são acessadas apenas ao abrir cada página de imóvel.
 
