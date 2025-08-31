@@ -12,21 +12,25 @@
         <meta name="author" content="Lenon Torma">
       
       
+        <link rel="canonical" href="https://lenontorma.github.io/webscraping_selenium/1_setup/">
       
-        <link rel="prev" href="../4_data_storage/">
       
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../2_data_sources/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
-        <title>5. Setup do Projeto - Web Scraping Aluguéis de imóveis</title>
+        <title>1. Setup do Projeto - Web Scraping Aluguéis de imóveis</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -74,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#5-setup-do-projeto" class="md-skip">
+        <a href="#setup-e-execucao-do-projeto" class="md-skip">
           Pular para conteúdo
         </a>
       
@@ -110,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5. Setup do Projeto
+              1. Setup do Projeto
             
           </span>
         </div>
@@ -181,7 +185,7 @@
         <a href="https://github.com/lenontorma/webscraping_selenium.git" title="Ir para repositório" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -227,7 +231,7 @@
       <a href="https://github.com/lenontorma/webscraping_selenium.git" title="Ir para repositório" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -263,20 +267,122 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../1_data_sources/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    1. Setup do Projeto
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    1. Fontes de Dados
+    1. Setup do Projeto
     
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-pre-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Pré-requisitos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-configuracao-do-ambiente-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Configuração do Ambiente Local
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Configuração do Ambiente Local">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passo-1-clonar-o-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passo 1: Clonar o Repositório
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-2-configurar-variaveis-de-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passo 2: Configurar Variáveis de Ambiente
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-executando-o-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Executando o Pipeline
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-verificacao-e-primeiro-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Verificação e Primeiro Uso
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -288,12 +394,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../2_architecture/" class="md-nav__link">
+      <a href="../2_data_sources/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    2. Arquitetura
+    2. Fonte de Dados
     
   </span>
   
@@ -332,12 +438,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../4_data_storage/" class="md-nav__link">
+      <a href="../4_airflow/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    4. Armazenamento de Dados
+    4. Orquestração - Airflow
     
   </span>
   
@@ -351,104 +457,20 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    5. Setup do Projeto
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../5_boas_praticas/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    5. Setup do Projeto
+    5. Versionamento - Github
     
   </span>
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Índice">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Índice
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#requisitos" class="md-nav__link">
-    <span class="md-ellipsis">
-      🧱 Requisitos
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#instalacao-com-poetry" class="md-nav__link">
-    <span class="md-ellipsis">
-      ⚙️ Instalação com Poetry
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="⚙️ Instalação com Poetry">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#banco-postgresql" class="md-nav__link">
-    <span class="md-ellipsis">
-      🛠️ Banco PostgreSQL
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rodar-a-documentacao-local" class="md-nav__link">
-    <span class="md-ellipsis">
-      📚 Rodar a Documentação Local
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -480,28 +502,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requisitos" class="md-nav__link">
+  <a href="#1-pre-requisitos" class="md-nav__link">
     <span class="md-ellipsis">
-      🧱 Requisitos
+      1. Pré-requisitos
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#instalacao-com-poetry" class="md-nav__link">
+  <a href="#2-configuracao-do-ambiente-local" class="md-nav__link">
     <span class="md-ellipsis">
-      ⚙️ Instalação com Poetry
+      2. Configuração do Ambiente Local
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="⚙️ Instalação com Poetry">
+    <nav class="md-nav" aria-label="2. Configuração do Ambiente Local">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#banco-postgresql" class="md-nav__link">
+  <a href="#passo-1-clonar-o-repositorio" class="md-nav__link">
     <span class="md-ellipsis">
-      🛠️ Banco PostgreSQL
+      Passo 1: Clonar o Repositório
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-2-configurar-variaveis-de-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passo 2: Configurar Variáveis de Ambiente
     </span>
   </a>
   
@@ -513,9 +544,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rodar-a-documentacao-local" class="md-nav__link">
+  <a href="#3-executando-o-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
-      📚 Rodar a Documentação Local
+      3. Executando o Pipeline
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-verificacao-e-primeiro-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Verificação e Primeiro Uso
     </span>
   </a>
   
@@ -540,51 +580,82 @@
   
 
 
-<h1 id="5-setup-do-projeto">5. Setup do Projeto<a class="headerlink" href="#5-setup-do-projeto" title="Permanent link">&para;</a></h1>
-<p>Este guia mostra como configurar o ambiente com <strong>Poetry</strong>, instalar as dependências e executar a pipeline completa — da extração dos dados ao carregamento no PostgreSQL.</p>
-<hr />
-<h2 id="requisitos">🧱 Requisitos<a class="headerlink" href="#requisitos" title="Permanent link">&para;</a></h2>
+<h1 id="setup-e-execucao-do-projeto">Setup e Execução do Projeto<a class="headerlink" href="#setup-e-execucao-do-projeto" title="Permanent link">&para;</a></h1>
+<p>Este documento fornece um guia detalhado para configurar o ambiente de desenvolvimento e executar o pipeline de web scraping localmente.</p>
+<h2 id="1-pre-requisitos">1. Pré-requisitos<a class="headerlink" href="#1-pre-requisitos" title="Permanent link">&para;</a></h2>
+<p>Antes de iniciar, é crucial garantir que as seguintes ferramentas estejam instaladas e configuradas corretamente em sua máquina:</p>
 <ul>
-<li><a href="https://www.python.org/">Python</a> 3.9+</li>
-<li><a href="https://python-poetry.org/">Poetry</a></li>
-<li><a href="https://www.google.com/chrome/">Google Chrome</a></li>
-<li><a href="https://sites.google.com/chromium.org/driver/">ChromeDriver</a></li>
-<li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+<li><strong><a href="https://git-scm.com/">Git</a></strong>: Necessário para clonar o repositório e gerenciar o versionamento do código.</li>
+<li><strong><a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a></strong>: A plataforma de containerização usada para executar o Apache Airflow e o banco de dados PostgreSQL de forma isolada e consistente.</li>
+<li><strong><a href="https://docs.astronomer.io/astro/cli/install-cli">Astro CLI</a></strong>: A ferramenta de linha de comando oficial da Astronomer, utilizada para gerenciar o ciclo de vida do ambiente Airflow local (<code>astro dev start</code>, <code>stop</code>, etc.).</li>
 </ul>
-<hr />
-<h2 id="instalacao-com-poetry">⚙️ Instalação com Poetry<a class="headerlink" href="#instalacao-com-poetry" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Clone o repositório</span>
-git<span class="w"> </span>clone<span class="w"> </span>https://github.com/lenontorma/webscraping_selenium.git
+<h2 id="2-configuracao-do-ambiente-local">2. Configuração do Ambiente Local<a class="headerlink" href="#2-configuracao-do-ambiente-local" title="Permanent link">&para;</a></h2>
+<p>Siga os passos abaixo para preparar o projeto após a instalação dos pré-requisitos.</p>
+<h3 id="passo-1-clonar-o-repositorio">Passo 1: Clonar o Repositório<a class="headerlink" href="#passo-1-clonar-o-repositorio" title="Permanent link">&para;</a></h3>
+<p>Abra um terminal, navegue até o diretório onde deseja salvar o projeto e execute os seguintes comandos:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span><span class="o">[</span>https://github.com/lenontorma/webscraping_selenium.git<span class="o">](</span>https://github.com/lenontorma/webscraping_selenium.git<span class="o">)</span>
 <span class="nb">cd</span><span class="w"> </span>webscraping_selenium
-
-<span class="c1"># 2. Instale as dependências com Poetry que estão no pyproject.toml</span>
-poetry<span class="w"> </span>install
-
-<span class="c1"># 3. Ative o ambiente virtual do Poetry</span>
-poetry<span class="w"> </span>shell<span class="w"> </span><span class="o">(</span>Deve<span class="w"> </span>ser<span class="w"> </span>instalada<span class="w"> </span>a<span class="w"> </span>extensão<span class="w"> </span><span class="s2">&quot;poetry self add poetry-plugin-shell&quot;</span><span class="o">)</span>
 </code></pre></div>
-<h3 id="banco-postgresql">🛠️ Banco PostgreSQL<a class="headerlink" href="#banco-postgresql" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>CREATE<span class="w"> </span>DATABASE<span class="w"> </span>webscraping<span class="p">;</span>
-
-<span class="se">\c</span><span class="w"> </span>webscraping
-
-CREATE<span class="w"> </span>TABLE<span class="w"> </span>imoveis<span class="w"> </span><span class="o">(</span>
-<span class="w">    </span>id<span class="w"> </span>SERIAL<span class="w"> </span>PRIMARY<span class="w"> </span>KEY,
-<span class="w">    </span>url<span class="w"> </span>TEXT,
-<span class="w">    </span>endereco<span class="w"> </span>TEXT,
-<span class="w">    </span>aluguel<span class="w"> </span>TEXT,
-<span class="w">    </span>condominio<span class="w"> </span>TEXT,
-<span class="w">    </span>iptu<span class="w"> </span>TEXT,
-<span class="w">    </span>total<span class="w"> </span>TEXT
-<span class="o">)</span><span class="p">;</span>
-
-E<span class="w"> </span>não<span class="w"> </span>se<span class="w"> </span>esqueça,<span class="w"> </span>ajuste<span class="w"> </span>a<span class="w"> </span>conexão<span class="w"> </span>no<span class="w"> </span>load_data.py<span class="w"> </span>com<span class="w"> </span>suas<span class="w"> </span>credenciais<span class="w"> </span>PostgreSQL.
-</code></pre></div>
-<h2 id="rodar-a-documentacao-local">📚 Rodar a Documentação Local<a class="headerlink" href="#rodar-a-documentacao-local" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>add<span class="w"> </span>mkdocs<span class="w"> </span>--group<span class="w"> </span>docs
-poetry<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
-</code></pre></div>
-<p>Acesse via: <a href="http://localhost:8000">http://localhost:8000</a></p>
+<h3 id="passo-2-configurar-variaveis-de-ambiente">Passo 2: Configurar Variáveis de Ambiente<a class="headerlink" href="#passo-2-configurar-variaveis-de-ambiente" title="Permanent link">&para;</a></h3>
+<p>O projeto utiliza um arquivo <code>.env</code> para gerenciar as credenciais do banco de dados e outras configurações do Airflow.</p>
+<ol>
+<li>
+<p>Crie o seu arquivo <code>.env</code> local a partir do template fornecido no repositório:
+    <div class="highlight"><pre><span></span><code>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Análise do Arquivo <code>.env</code></strong>:</p>
+<ul>
+<li>O arquivo <code>.env.example</code> já contém todos os valores padrão necessários para a primeira execução do projeto em um ambiente local.</li>
+<li>Não é necessário editar o arquivo <code>.env</code> para o primeiro <code>start</code>. No entanto, se precisar se conectar a um banco de dados externo ou alterar portas, este é o arquivo que você deve modificar.</li>
+</ul>
+<p>Não versione o arquivo "<code>.env</code>"
+O arquivo <code>.env</code> contém informações sensíveis e está listado no <code>.gitignore</code> para prevenir que seja enviado acidentalmente para o repositório remoto. Nunca remova esta linha do <code>.gitignore</code>.</p>
+</li>
+</ol>
+<h2 id="3-executando-o-pipeline">3. Executando o Pipeline<a class="headerlink" href="#3-executando-o-pipeline" title="Permanent link">&para;</a></h2>
+<p>Com o ambiente configurado, o próximo passo é iniciar os serviços.</p>
+<ol>
+<li>
+<p>A partir da raiz do projeto, execute o comando abaixo:
+    <div class="highlight"><pre><span></span><code>astro<span class="w"> </span>dev<span class="w"> </span>start
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>O que este comando faz?</strong></p>
+<ul>
+<li>Ele lê o seu arquivo <code>docker-compose.yml</code>.</li>
+<li>Constrói as imagens Docker necessárias para o Airflow (webserver, scheduler, triggerer) e para o banco de dados PostgreSQL.</li>
+<li>Inicia todos os contêineres em background (<code>-d</code> flag implícita).</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-verificacao-e-primeiro-uso">4. Verificação e Primeiro Uso<a class="headerlink" href="#4-verificacao-e-primeiro-uso" title="Permanent link">&para;</a></h2>
+<p>Após a execução bem-sucedida do <code>astro dev start</code>, o ambiente Airflow estará disponível.</p>
+<ol>
+<li>
+<p><strong>Acesse a Interface Web:</strong>
+    Abra seu navegador e acesse <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+</li>
+<li>
+<p><strong>Faça o Login:</strong>
+    Utilize as credenciais padrão para o ambiente de desenvolvimento:</p>
+<ul>
+<li><strong>Usuário:</strong> <code>airflow</code></li>
+<li><strong>Senha:</strong> <code>airflow</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Ative e Execute a DAG:</strong></p>
+<ul>
+<li>Na página principal, você verá a lista de DAGs disponíveis.</li>
+<li>Encontre a DAG relacionada a este projeto (ex: <code>casarao_imoveis_etl</code>).</li>
+<li>Ative a DAG utilizando o botão de toggle na coluna "Ativada".</li>
+<li>Para iniciar a primeira coleta de dados, clique no botão "Play" (▶️) na coluna "Ações".</li>
+</ul>
+</li>
+</ol>
 
 
 
@@ -639,10 +710,10 @@ poetry<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> 
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>

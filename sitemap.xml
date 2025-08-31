@@ -1,3 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://lenontorma.github.io/webscraping_selenium/</loc>
+         <lastmod>2025-08-31</lastmod>
+    </url>
+    <url>
+         <loc>https://lenontorma.github.io/webscraping_selenium/1_setup/</loc>
+         <lastmod>2025-08-31</lastmod>
+    </url>
+    <url>
+         <loc>https://lenontorma.github.io/webscraping_selenium/2_data_sources/</loc>
+         <lastmod>2025-08-31</lastmod>
+    </url>
+    <url>
+         <loc>https://lenontorma.github.io/webscraping_selenium/3_scraping_logic/</loc>
+         <lastmod>2025-08-31</lastmod>
+    </url>
+    <url>
+         <loc>https://lenontorma.github.io/webscraping_selenium/4_airflow/</loc>
+         <lastmod>2025-08-31</lastmod>
+    </url>
+    <url>
+         <loc>https://lenontorma.github.io/webscraping_selenium/5_boas_praticas/</loc>
+         <lastmod>2025-08-31</lastmod>
+    </url>
 </urlset>
