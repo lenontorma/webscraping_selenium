@@ -2,6 +2,7 @@ site_name: Web Scraping Aluguéis de imóveis
 site_description: Documentação completa da pipeline de scraping e ETL com Selenium, JSON e PostgreSQL.
 site_author: Lenon Torma
 repo_url: https://github.com/lenontorma/webscraping_selenium.git 
+site_url: https://lenontorma.github.io/webscraping_selenium/
 
 plugins:
   - search
@@ -27,11 +28,11 @@ theme:
 
 nav:
   - Início: index.md
-  - 1. Fontes de Dados: 1_data_sources.md
-  - 2. Arquitetura: 2_architecture.md
+  - 1. Setup do Projeto: 1_setup.md
+  - 2. Fonte de Dados: 2_data_sources.md
   - 3. Lógica de Scraping: 3_scraping_logic.md
-  - 4. Armazenamento de Dados: 4_data_storage.md
-  - 5. Setup do Projeto: 5_setup.md
+  - 4. Orquestração - Airflow: 4_airflow.md
+  - 5. Versionamento - Github: 5_boas_praticas.md
 
 markdown_extensions:
   - toc:
