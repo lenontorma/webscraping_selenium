@@ -31,4 +31,34 @@ Este projeto foi construído utilizando as seguintes tecnologias e ferramentas:
 
 ## 🚀 Como Executar (Quick Start)
 
-*Esta seção será adicionada em breve com os comandos essenciais para a execução do projeto.*
+Siga os passos abaixo para executar o projeto em seu ambiente local.
+
+### Pré-requisitos
+
+* [Git](https://git-scm.com/)
+* [Docker](https://www.docker.com/products/docker-desktop/)
+* [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) (ferramenta para rodar o Airflow localmente)
+
+### Passo a passo
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/lenontorma/webscraping_selenium.git](https://github.com/lenontorma/webscraping_selenium.git)
+    cd webscraping_selenium
+    ```
+
+2.  **Crie o arquivo de ambiente:**
+    ```bash
+    cp .env.example .env
+    ```
+    > **Nota:** Os valores padrão neste arquivo já são suficientes para a primeira execução.
+
+3.  **Inicie o ambiente Airflow:**
+    ```bash
+    astro dev start
+    ```
+
+4.  **Acesse e ative a DAG:**
+    * Abra a interface do Airflow em [http://localhost:8080](http://localhost:8080).
+    * Faça login com usuário `airflow` e senha `airflow`.
+    * Na lista de DAGs, encontre a que pertence a este projeto, ative-a no botão de toggle e inicie a primeira execução manualmente.
